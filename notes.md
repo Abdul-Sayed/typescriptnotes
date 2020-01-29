@@ -77,13 +77,12 @@ Assigning a variable as an object literal infers it to be not only of type objec
     };
 
 This can be written explicitely as;
-    const person: {
-      name: string;
-      age: number;
-    } = {
+    const person: { name: string; age: number; } = {
       name: 'Max',
       age: 30
     };
+
+person could not be set to an object of different keys or different value types or different dimensions. 
 
 ## Arrays
 
