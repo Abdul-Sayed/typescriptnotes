@@ -309,19 +309,34 @@ if (button) {
 
 ## Typescript classes  
 
-
 class Person {
   constructor(
     public name: string,
-    private gender: string,
+    private genderType: string,
     protected age: number
   ) {
     // ...
+  }
+
+  printAge() {
+    console.log(this.age);
+  }
+
+  private setType(type: string) {
+    this.genderType = type;
+    console.log(this.genderType);
+  }
+
+  descriptiveComment(description: string) {
+    this.setType(description);
   }
 }
 
 const person = new Person("Max", "male", 29);
 
 person.name; //=> "Max"
-person.gender; //=> unaccesable
-person.age; //=> unaccecable
+person.printAge(); //=> 29
+// person.gender; //=> unaccesable, since private variables are only accessable within the Class
+// person.age; //=> unaccesible, since protected variables are only accessable within the Class, and classes that inherit from it
+// person.setType("fluid");  //=> unaccessable
+person.descriptiveComment("fluid");
