@@ -266,10 +266,11 @@ Some functions never return anything, such as when throwing errors
 If you set "strictNullChecks": true in compilerOptions of tsconfig, ts complains if anything but undefiend is set to null
 
     let canBeNull = 12;
-    canBeNull = null;   //=> will alert an error  
+    canBeNull = null;   //=> will alert an error; type number cannot be reset to type null
     let canAlsoBeNull;
-    canAsloBeNull = null;   //=> still no problem
-
+    canAlsoBeNull = null;   //=> no problem because type any can be set to type null
+    let canThisBeAny:null = null;
+    canThisBeAny = 12;    //=> will alert an error; type number cannot be assigned to type null
 ## Working with the DOM
 
 When selecting DOM elements that may not exist (yet), its best to wrap that in an if check, otherwise ts compains that its null. 
@@ -279,3 +280,27 @@ const button = document.querySelector('button');
 if (button) {
   button.addEventListener('click', () => console.log('clicked'))
 }
+
+
+## Example 
+
+    type BankAccount = { money: number; deposit: (value: number) => void };
+
+    let bankAccount: BankAccount = {
+      money: 2000,
+      deposit(value: number): void {
+        this.money += value;
+      }
+    };
+
+    let myself: {
+      name: string;
+      bankAccount: BankAccount;
+      hobbies: string[];
+    } = {
+      name: "Max",
+      bankAccount: bankAccount,
+      hobbies: ["Sports", "Cooking"]
+    };
+
+    myself.bankAccount.deposit(3000);
