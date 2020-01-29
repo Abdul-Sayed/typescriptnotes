@@ -227,6 +227,9 @@ console.log(multiply(5, 'Max'))  //==> ts complains beacuse 2nd argument is not 
 
     addAndHandle(10, 20, num => console.log(num))
 
+
+## Other Types
+
 ### Void type
 Functions with no return statemnt; that don't return anything (ex: functions that only log info) return a void type
 These are functions that return undefined
@@ -236,8 +239,6 @@ function sayHello(): void {
 }
 
 undefined is also a valid typescript type but type casting a variable to undefined is not useful since later it will be assigned a value. 
-
-## Other Types
 
 ### Unknown Type
 For when you don't know in advance a variable's type
@@ -252,7 +253,7 @@ if (typeof userInput === 'string') {
 }
 
 ### Never Type 
-Some functions don't need to return anything, they just perform a task 
+Some functions never return anything, such as when throwing errors
 
   function generateError(message: string, code: number): never {
     throw { message: message, errorCode: code };
@@ -261,6 +262,13 @@ Some functions don't need to return anything, they just perform a task
   const result = generateError('An error occured!', 500);
   console.log(result)   //=> logs nothing, not even undefined
 
+### Nullable Types 
+If you set "strictNullChecks": true in compilerOptions of tsconfig, ts complains if anything but undefiend is set to null
+
+    let canBeNull = 12;
+    canBeNull = null;   //=> will alert an error  
+    let canAlsoBeNull;
+    canAsloBeNull = null;   //=> still no problem
 
 ## Working with the DOM
 
