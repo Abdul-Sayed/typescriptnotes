@@ -304,3 +304,24 @@ if (button) {
     };
 
     myself.bankAccount.deposit(3000);
+
+
+
+## Typescript classes  
+
+
+class Person {
+  constructor(
+    public name: string,
+    private gender: string,
+    protected age: number
+  ) {
+    // ...
+  }
+}
+
+const person = new Person("Max", "male", 29);
+
+person.name; //=> "Max"
+person.gender; //=> unaccesable
+person.age; //=> unaccecable
