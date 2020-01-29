@@ -76,13 +76,22 @@ Assigning a variable as an object literal infers it to be not only of type objec
       age: 30
     };
 
-This can be written explicitely as;
+The property:type blueprint of the person object can be written explicitely as;
     const person: { name: string; age: number; } = {
       name: 'Max',
       age: 30
     };
 
-person could not be set to an object of different keys or different value types or different dimensions. 
+Therefore person could not be set to an object of different keys, value types, or dimensions. 
+
+---
+complex object
+    let complex: {data: number[], output: (all:boolean) => number[]} = {
+      data: [100, 3.99, 10],
+      output: (all: boolean) => {
+        return data
+      }
+    }
 
 ## Arrays
 
@@ -127,9 +136,15 @@ Used when a variable can be of multiple types
 
 Your function may need a run time check when working with ambiguous union types
 
+    let myAge: number | string = 27;
+    myAge = "27"  //=> ok
+    myAge = true  //=> not ok
+
+  
+
     function combine(input1: number | string, input2: number | string) {
       let result
-      if (typeof input1 === 'number && typeof input2 === 'number) {
+      if (typeof input1 === 'number' && typeof input2 === 'number') {
       result = input1 + input2;
       } else {
       result = input1.toString() + input2.toString();
@@ -162,6 +177,10 @@ Typically used to make references to complex union types;
 
     type Combinable = number | string;
     let input1: Combinable
+
+---
+
+    type Complex = { data: number[]; output: (all: boolean) => number[] }
 
 ## Function's return type 
 Explicitely state the type of a function's return, rather than leaving it to typescript to infer it;
