@@ -373,3 +373,64 @@ console.log(max);
     plant.species = "fern";
 
     console.log(plant.species); // fern
+
+
+## Static properties 
+	class CommonMath {
+    static PI = 3.14;
+
+    static Circumference(diameter) {
+      return diameter * this.PI;
+    }
+	}
+
+    CommonMath.Pi   // 3.14
+    CommonMath.Circumference(2)  // 6.28;
+
+
+## Abstract classes - base classes that cannot be instantiated, can only be inherited
+Used to make a generalized blueprint that wont be used other than making other more specialized blueprints
+
+    abstract class Project {
+      projectName: string = "Default";
+      budget: number = 1;
+
+      abstract changeName(name: string): void;    // abstract methods only define the parameter and return type. Inheriting classes will need to implement the method on their own. 
+
+      calcBudget() {         // normal methods are inherited, and dont need to be re-implemented
+        return this.budget * 2;
+      }
+    }
+
+    class ITProject extends Project {
+      changeName(name: string) {
+        this.projectName = name;
+      }
+    }
+
+    let newProject = new ITProject;
+    newProject.changeName("Angular MEAN proj");
+    newProject.budget = 1000;
+
+    console.log(newProject);
+
+
+
+## Singleton Pattern
+Object Oriented Singleton Pattern - create a class instance once only, and subsequently reference that same instance
+Useful for preserving a datastructure across a whole application
+class OnlyOne {
+  private static instance: OnlyOne;
+  private constructor(public name: string) {
+    this.name = name;
+  }
+  static getInstance() {
+    if (!OnlyOne.instance) {
+      OnlyOne.instance = new OnlyOne('The Only One');
+    }
+    return OnlyOne.instance;
+  }
+}
+
+let wrong = new OnlyOne('The Only One');   // cannot make an instance of this class
+let right = OnlyOne.getInstance();   // after this first time, no instances can be created
