@@ -434,3 +434,7 @@ class OnlyOne {
 
 let wrong = new OnlyOne('The Only One');   // cannot make an instance of this class
 let right = OnlyOne.getInstance();   // after this first time, no instances can be created
+
+## readonly properties
+
+To make properties readonly, you can make them private and provide them via a getter method. Another way is to simply designate them as readonly; `public readonly na,e: string`
