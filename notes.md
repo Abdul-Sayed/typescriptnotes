@@ -309,6 +309,29 @@ if (button) {
 
 ## Typescript classes  
 
+class Car {
+  name: string;
+  acceleration: number = 0;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  honk() {
+    console.log("Toooooooooot!");
+  }
+
+  accelerate(speed: number) {
+    this.acceleration = this.acceleration + speed;
+  }
+}
+
+var car = new Car("BMW");
+console.log(car.acceleration);
+car.accelerate(10);
+console.log(car.acceleration);
+
+----
 class Person {
   constructor(
     public name: string,
