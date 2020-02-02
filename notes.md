@@ -312,10 +312,11 @@ if (button) {
 class Person {
   constructor(
     public name: string,
-    private genderType: string,
-    protected age: number
+    protected age: number,
+    private genderType: string
   ) {
-    // ...
+    this.name = name;
+    this.age = age;
   }
 
   printAge() {
@@ -332,11 +333,43 @@ class Person {
   }
 }
 
-const person = new Person("Max", "male", 29);
+const person = new Person("Max", 29, "male");
 
-person.name; //=> "Max"
-person.printAge(); //=> 29
-// person.gender; //=> unaccesable, since private variables are only accessable within the Class
+console.log(person.name); //=> "Max"
 // person.age; //=> unaccesible, since protected variables are only accessable within the Class, and classes that inherit from it
+// person.genderType; //=> unaccesable, since private variables are only accessable within the Class
+person.printAge(); //=> 29
 // person.setType("fluid");  //=> unaccessable
 person.descriptiveComment("fluid");
+
+class Max extends Person {
+  constructor(name: string, age: number, genderType: string) {
+    super(name, age, genderType);
+  }
+}
+
+const max = new Max("Max", 32, "fagh");
+console.log(max);
+
+
+## Getters / Setters 
+
+    class Plant {
+      private _species: string = "Green Plant";
+
+      get species() {
+        return this._species;
+      }
+
+      set species(value: string) {
+        this._species = value;
+      }
+    }
+
+    let plant = new Plant();
+
+    console.log(plant.species);  // Green Plant
+
+    plant.species = "fern";
+
+    console.log(plant.species); // fern
