@@ -374,6 +374,24 @@ class Max extends Person {
 const max = new Max("Max", 32, "fagh");
 console.log(max);
 
+## Inheritance v
+
+class baseObject {
+  constructor(public width: number, public length: number) {
+    this.width = width;
+    this.length = length;
+  }
+}
+
+class Rectangle extends baseObject {
+  calcSize() {
+    return this.width * this.length;
+  }
+}
+
+const rectangle = new Rectangle(5, 2);
+
+console.log(rectangle.calcSize());
 
 ## Getters / Setters 
 
