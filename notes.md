@@ -479,3 +479,25 @@ let right = OnlyOne.getInstance();   // after this first time, no instances can 
 ## readonly properties
 
 To make properties readonly, you can make them private and provide them via a getter method. Another way is to simply designate them as readonly; `public readonly na,e: string`
+
+
+# Modules  
+
+## Namespaces 
+
+  When functions can be grouped into the same category - such as math functions. Namespace properties that are exported can be consumed from outside;
+
+    namespace MyMath {
+      const PI = 3.14;
+
+      export function calculateCircumference(diameter: number) {
+        return diameter * PI;
+      }
+
+      export function calculateRectangle(width: number, length: number) {
+        return width * length;
+      }
+    }
+
+    console.log(MyMath.calculateCircumference(10));
+    console.log(MyMath.calculateRectangle(5, 2))
