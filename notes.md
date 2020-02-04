@@ -501,3 +501,9 @@ To make properties readonly, you can make them private and provide them via a ge
 
     console.log(MyMath.calculateCircumference(10));
     console.log(MyMath.calculateRectangle(5, 2))
+
+
+## Multiple Files 
+For larger applications, multiple namespaces accross multiple files are common. 
+
+`tsc --outFile app.js circleMath.ts rectangle Math.ts app.ts`
