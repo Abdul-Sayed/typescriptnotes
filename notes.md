@@ -520,5 +520,5 @@ rectangleMath.ts :
         return width * length;
       }
     }
-Typescript can compile multiple ts files into a single js file (app.js)
-`tsc --outFile app.js circleMath.ts rectangle Math.ts app.ts`
+Typescript can compile multiple ts files into a single js file (app.js). Order wrtten is the order the files are bundled together. 
+`tsc --outFile dist/app.js src/circleMath.ts src/rectangleMath.ts src/index.ts`
