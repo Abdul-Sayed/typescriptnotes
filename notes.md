@@ -505,5 +505,20 @@ To make properties readonly, you can make them private and provide them via a ge
 
 ## Multiple Files 
 For larger applications, multiple namespaces accross multiple files are common. 
-
+If the above namespace were two files; 
+circleMath.ts :
+    namespace MyMath {
+      const PI = 3.14;
+      export function calculateCircumference(diameter: number) {
+        return diameter * PI;
+      }
+    }
+rectangleMath.ts :
+    namespace MyMath {
+      const PI = 3.14;
+      export function calculateRectangle(width: number, length: number) {
+        return width * length;
+      }
+    }
+Typescript can compile multiple ts files into a single js file (app.js)
 `tsc --outFile app.js circleMath.ts rectangle Math.ts app.ts`
