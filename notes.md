@@ -487,8 +487,6 @@ let right = OnlyOne.getInstance();   // after this first time, no instances can 
 To make properties readonly, you can make them private and provide them via a getter method. Another way is to simply designate them as readonly; `public readonly na,e: string`
 
 
-# Modules  
-
 ## Namespaces 
 
   When functions can be grouped into the same category - such as math functions. Namespace properties that are exported can be consumed from outside;
@@ -556,3 +554,10 @@ If a namespace in circleMath.ts is:
 Access it in index.ts as:
 /// <reference path="circleMath.ts" />
 console.log(MyMath.Circle.calculateCircumference(10));
+OR setup an alias for the nested fuction
+import CircleMath = MyMath.Circle;
+console.log(CircleMath.calculateCircumference(10));
+
+# Modules  
+
+When there are many namepaces, its  a drawback and you must imperitively export and reference each function being used. It becomes unclear which ts file has which namepace dependency. Modules are declarative about which file has which module dependency which keeps its own scope (doesn't bleed into global scope). 
