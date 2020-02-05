@@ -356,6 +356,23 @@ If you want to set up an interface for dynamic data where the properties are not
 
     greet(myPerson)  // Hello Maxx
 
+### Interface Inheritance 
+Object based interfaces can be inherited and expanded upon. 
+
+    interface AgedPerson extends NamedPerson {
+      wealth: number;
+    }
+
+    // All the (required) properties of the original interface must be re-written
+    const oldPerson: AgedPerson = {
+      name: 'Max',
+      greet(name: string): void {
+        console.log(`Well hello there ${name}`)
+      },
+      wealth: 9999999
+    }
+ 
+
 ### Functional Interfaces 
 In addition to objects, interfaces can serve as blueprints for function  
 
