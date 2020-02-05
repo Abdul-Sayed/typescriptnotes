@@ -281,6 +281,8 @@ Interfaces can be updated to take on additional opional properties;
       name: string,
       age?: number
     }
+
+### Interfaces with dynamic data
 If you want to set up an interface for dynamic data where the properties are not known in advance, use:
     interface NamedPerson {
       name: string,
@@ -297,7 +299,7 @@ If you want to set up an interface for dynamic data where the properties are not
     }
     greet(person)
 
-Interface Methods: 
+### Interface Methods: 
 
     interface NamedPerson {
       name: string;
@@ -323,6 +325,36 @@ Interface Methods:
     greet(person)  // Hello Maxx
 
     person.greet('Anna');  // Well hello there Anna
+
+### Interfaces with classes 
+
+  interface NamedPerson {
+    name: string;
+    age?: number;
+    [propName: string]: any;
+    greet(nickName: string): void;
+  }
+
+
+  class Person implements NamedPerson {
+    constructor(public name: string) {
+      this.name = name
+    }
+    greet(nickName: string): void {
+      console.log(`Well hello there ${nickName}`)
+    }
+  }
+
+  const myPerson = new Person("Maxx");
+  myPerson.greet("Anna");   //=> Well hello there Anna
+
+
+  // fuctions that expect an interface can also be passed a class which implements the interface
+  function greet(person: NamedPerson): void {
+    console.log(`Hello ${person.name}`)
+  }
+
+  greet(myPerson)  // Hello Maxx
 
 ## Other Types
 
