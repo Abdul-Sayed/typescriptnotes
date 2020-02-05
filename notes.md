@@ -561,3 +561,4 @@ console.log(CircleMath.calculateCircumference(10));
 # Modules  
 
 When there are many namepaces, its  a drawback and you must imperitively export and reference each function being used. It becomes unclear which ts file has which namepace dependency. Modules are declarative about which file has which module dependency which keeps its own scope (doesn't bleed into global scope). 
+
