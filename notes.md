@@ -52,6 +52,12 @@ Uncomment `"removeComments": true`
 
 `"noEmitOnError": true`  -> ts file will not compile to js if it has an error, even if its valid js code
 
+Important compilation settings:
+    "module": "system"
+    "outFile": "./dist/index.js"
+    "outDir": "./dist"
+    "rootDir": "./src"
+    and run tsc -w in terminal
 
 # Type Declarations
 
@@ -520,5 +526,17 @@ rectangleMath.ts :
         return width * length;
       }
     }
+Namespaces can then be inported into index.ts as follows;
+    /// <reference path="circleMath.ts" />
+    /// <reference path="rectangleMath.ts" />
+
+In tsconfig.json, set 
+    "module": "system"
+    "outFile": "./dist/index.js"
+    "outDir": "./dist"
+    "rootDir": "./src"
+    and run tsc -w
+    
+Also (but less preferred way):
 Typescript can compile multiple ts files into a single js file (app.js). Order wrtten is the order the files are bundled together. 
 `tsc --outFile dist/app.js src/circleMath.ts src/rectangleMath.ts src/index.ts`
