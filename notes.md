@@ -328,33 +328,44 @@ If you want to set up an interface for dynamic data where the properties are not
 
 ### Interfaces with classes 
 
-  interface NamedPerson {
-    name: string;
-    age?: number;
-    [propName: string]: any;
-    greet(nickName: string): void;
-  }
-
-
-  class Person implements NamedPerson {
-    constructor(public name: string) {
-      this.name = name
+    interface NamedPerson {
+      name: string;
+      age?: number;
+      [propName: string]: any;
+      greet(nickName: string): void;
     }
-    greet(nickName: string): void {
-      console.log(`Well hello there ${nickName}`)
+
+
+    class Person implements NamedPerson {
+      constructor(public name: string) {
+        this.name = name
+      }
+      greet(nickName: string): void {
+        console.log(`Well hello there ${nickName}`)
+      }
     }
-  }
 
-  const myPerson = new Person("Maxx");
-  myPerson.greet("Anna");   //=> Well hello there Anna
+    const myPerson = new Person("Maxx");
+    myPerson.greet("Anna");   //=> Well hello there Anna
 
 
-  // fuctions that expect an interface can also be passed a class which implements the interface
-  function greet(person: NamedPerson): void {
-    console.log(`Hello ${person.name}`)
-  }
+    // fuctions that expect an interface can also be passed a class which implements the interface
+    function greet(person: NamedPerson): void {
+      console.log(`Hello ${person.name}`)
+    }
 
-  greet(myPerson)  // Hello Maxx
+    greet(myPerson)  // Hello Maxx
+
+### Functional Interfaces 
+In addition to objects, interfaces can serve as blueprints for function  
+
+    interface DoubleValueFunc {
+      (number1: number, number2: number): number;
+    }
+    let myDoubleFunction: DoubleValueFunc = function (value1: number, value2: number) {
+      return (value1 + value2) * 2;
+    }
+    console.log(myDoubleFunction(10, 20));  //==> 60
 
 ## Other Types
 
