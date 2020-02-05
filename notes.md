@@ -248,7 +248,7 @@ When passing objects as a function argument, the entire passed object needs to b
     greet(person)
 
 
-With interfaces, instead of typecasting the entire object, only the property the function needs can be casted.
+Instead of typecasting the entire object, only the property the function needs can be casted.
 When passing large objects, this is clearly advantages. Only type cast the properties used.
 
     function greet(person: { name: string }): void {
@@ -261,6 +261,19 @@ When passing large objects, this is clearly advantages. Only type cast the prope
     greet(person)
 
 
+If certain object properties are being used often, an Interface can be created to represent them when passing types to functions. 
+So the functions can be guaranteed certain properties are available and only the object and the interface need to be updated during changes. 
+    interface NamedPerson {
+      name: string
+    }
+    function greet(person: NamedPerson): void {
+      console.log(`Hello ${person.name}`)
+    }
+    const person = {
+      name: "Maxx",
+      age: 27
+    }
+    greet(person)
 
 
 ## Other Types
