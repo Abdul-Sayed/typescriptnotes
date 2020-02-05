@@ -262,7 +262,7 @@ When passing large objects, this is clearly advantages. Only type cast the prope
 
 
 If certain object properties are being used often, an Interface can be created to represent them when passing types to functions. 
-So the functions can be guaranteed certain properties are available and only the object and the interface need to be updated during changes. 
+Only the object and the interface need to be updated during changes, and the functions can be guaranteed certain properties are available
     interface NamedPerson {
       name: string
     }
@@ -275,6 +275,54 @@ So the functions can be guaranteed certain properties are available and only the
     }
     greet(person)
 
+Note: Typescript complains if you pass an object literal that contains extra properties directly to the function. A reference to an object is fine.
+Interfaces can be updated to take on additional opional properties;
+    interface NamedPerson {
+      name: string,
+      age?: number
+    }
+If you want to set up an interface for dynamic data where the properties are not known in advance, use:
+    interface NamedPerson {
+      name: string,
+      age?: number,
+      [propName: string]: any
+    }
+    function greet(person: NamedPerson): void {
+      console.log(`Hello ${person.name}`)
+    }
+    const person = {
+      name: "Maxx",
+      age: 27,
+      hobbies: ['cooking', 'reading']
+    }
+    greet(person)
+
+Interface Methods: 
+
+    interface NamedPerson {
+      name: string;
+      age?: number;
+      [propName: string]: any;
+      greet(nickName: string): void;
+    }
+
+    const person = {
+      name: "Maxx",
+      age: 27,
+      hobbies: ['cooking', 'reading'],
+      greet(nickName: string): void {
+        console.log(`Well hello there ${nickName}`)
+      }
+    }
+
+    function greet(person: NamedPerson): void {
+      console.log(`Hello ${person.name}`)
+    }
+
+
+    greet(person)  // Hello Maxx
+
+    person.greet('Anna');  // Well hello there Anna
 
 ## Other Types
 
