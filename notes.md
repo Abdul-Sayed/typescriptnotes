@@ -234,6 +234,35 @@ console.log(multiply(5, 'Max'))  //==> ts complains beacuse 2nd argument is not 
     addAndHandle(10, 20, num => console.log(num))
 
 
+## Interfaces  
+
+When passing objects as a function argument, the entire passed object needs to be type casted;
+
+    function greet(person: { name: string; age: number }): void {
+      console.log(`Hello ${person.name}`)
+    }
+    const person = {
+      name: "Maxx",
+      age: 27
+    }
+    greet(person)
+
+
+With interfaces, instead of typecasting the entire object, only the property the function needs can be casted.
+When passing large objects, this is clearly advantages. Only type cast the properties used.
+
+    function greet(person: { name: string }): void {
+      console.log(`Hello ${person.name}`)
+    }
+    const person = {
+      name: "Maxx",
+      age: 27
+    }
+    greet(person)
+
+
+
+
 ## Other Types
 
 ### Void type
@@ -560,5 +589,34 @@ console.log(CircleMath.calculateCircumference(10));
 
 # Modules  
 
-When there are many namepaces, its  a drawback and you must imperitively export and reference each function being used. It becomes unclear which ts file has which namepace dependency. Modules are declarative about which file has which module dependency which keeps its own scope (doesn't bleed into global scope). 
+When there are many namepaces, its  a drawback and you must imperitively export and reference each function being used. It becomes unclear which ts file has which namepace dependency. Modules are declarative about which file has which module dependency which keeps its own scope (doesn't bleed into global scope). The problem is that a module loader has to be setip. 
 
+In circle.ts  
+    export const PI = Math.PI;
+
+    export function calculateCircumference(diameter: number) {
+      return diameter * PI;
+    }
+
+In rectangle.ts 
+    export default function calculateRectangle(width: number, length: number) {
+      return width * length;
+    }  //==> use default if a file exports only one function or property
+
+In index.ts 
+    import { PI, calculateCircumference } from "./circle";
+    // import * as circle from './circle';    ==> alternative
+
+    import calculateRectangle from "./rectangle";
+
+
+    console.log(calculateCircumference(10))
+    // console.log(circle.calculateCircumference(10))   ==> alternative
+
+    console.log(calculateRectangle(5, 2)); 
+
+
+
+
+
+ 
