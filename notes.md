@@ -509,7 +509,7 @@ To make properties readonly, you can make them private and provide them via a ge
     console.log(MyMath.calculateRectangle(5, 2))
 
 
-## Multiple Files 
+### Multiple Files 
 For larger applications, multiple namespaces accross multiple files are common. 
 If the above namespace were two files; 
 circleMath.ts :
@@ -536,7 +536,23 @@ In tsconfig.json, set
     "outDir": "./dist"
     "rootDir": "./src"
     and run tsc -w
-    
+
 Also (but less preferred way):
 Typescript can compile multiple ts files into a single js file (app.js). Order wrtten is the order the files are bundled together. 
 `tsc --outFile dist/app.js src/circleMath.ts src/rectangleMath.ts src/index.ts`
+
+### NEsted Namespaces 
+
+If a namespace in circleMath.ts is:
+    namespace MyMath {
+      export namespace Circle {
+        const PI = 3.14;
+        export function calculateCircumference(diameter: number) {
+          return diameter * PI;
+        }
+      }
+    }
+
+Access it in index.ts as:
+/// <reference path="circleMath.ts" />
+console.log(MyMath.Circle.calculateCircumference(10));
