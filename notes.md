@@ -738,6 +738,59 @@ In index.ts
 
 
 
-
-
+## Generics 
+Generics are a flexible way to create functions whose parameter type is cast to the type of supplied argument (parameterize types)
  
+    function echo<Type>(data: Type): Type {
+      return data
+    }
+
+    function echo<Type>(data: Type): Type {
+      return data
+    }
+
+    let foo = echo<string>("FUBAR")    // the agrument types will be inferred but can be made explicit as <string>
+    let bar = echo<number>(27)
+
+    console.log(foo)
+    console.log(bar)
+
+
+### Generics with classes 
+
+    class Person {
+      firstName: string;
+      lastName: string;
+
+      constructor(firstName: string, lastName: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+      }
+
+      getFullName() {
+        return this.firstName + " " + this.lastName;
+      }
+    }
+
+    class Admin extends Person { }
+
+    let admin = new Admin('admin', 'boss');
+
+
+    // set up the function to expect and return type class Person
+    // function personEcho(person: Person): Person {
+    //   return person;
+    // }
+
+    // set this up to be a generic where T is a placeholder for classes that extend person
+    function personEcho<T extends Person>(person: T): T {
+      return person;
+    }
+
+
+    // let foo = personEcho(admin);   // If personEcho is typed to Person, foo will be of type Person
+    let foo = personEcho(admin);  // If personEcho is typed to <T>, foo will be of type Admin
+
+    console.log(foo); // Admin {firstname: 'admin', lastName: 'boss'}
+
+    console.log(personEcho(55))  // Argument of type 55 is not assignable to parameter of type Person
