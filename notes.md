@@ -745,10 +745,6 @@ Generics are a flexible way to create functions whose parameter type is cast to 
       return data
     }
 
-    function echo<Type>(data: Type): Type {
-      return data
-    }
-
     let foo = echo<string>("FUBAR")    // the agrument types will be inferred but can be made explicit as <string>
     let bar = echo<number>(27)
 
@@ -777,12 +773,12 @@ Generics are a flexible way to create functions whose parameter type is cast to 
     let admin = new Admin('admin', 'boss');
 
 
-    // set up the function to expect and return type class Person
+    // Normal way to set up the function to expect and return type class Person
     // function personEcho(person: Person): Person {
     //   return person;
     // }
 
-    // set this up to be a generic where T is a placeholder for classes that extend person
+    // set this up to be a generic where T is a placeholder for any class that extends person
     function personEcho<T extends Person>(person: T): T {
       return person;
     }
