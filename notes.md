@@ -105,6 +105,11 @@ Array type - specify if it will be an array of strings, numbers, objects, etc
 let favorites: string[];
 Mixed arrays are inferred by javascript to be a union of multiple types
 
+    const testResults: Array<number> = [1.94, 2.33]
+    testResults.push(-2.9)   // ok
+    testResults.push("hell")   // breaks
+
+
 ## Tupule
 
 Arrays of fixed length and type format 
