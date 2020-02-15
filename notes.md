@@ -90,6 +90,9 @@ The property:type blueprint of the person object can be written explicitely as;
 
 Therefore person could not be set to an object of different keys, value types, or dimensions. 
 
+
+const heights: { [key: string]: number } = {"John": 67, "paul": 83}
+
 ---
 complex object
     let complex: {data: number[], output: (all:boolean) => number[]} = {
@@ -103,12 +106,15 @@ complex object
 
 Array type - specify if it will be an array of strings, numbers, objects, etc
 let favorites: string[];
-Mixed arrays are inferred by javascript to be a union of multiple types
 
-    const testResults: Array<number> = [1.94, 2.33]
+    let averages: number[] = [75, 89, 84];
+    averages.push(92)
+
+    const testResults: Array<number> = [1.94, 2.33]    //=> Alternative array of only type number
     testResults.push(-2.9)   // ok
     testResults.push("hell")   // breaks
 
+Mixed arrays are inferred by javascript to be a union of multiple types
 
 ## Tupule
 
@@ -743,7 +749,7 @@ In index.ts
 
 
 
-## Generics 
+## Generic Functions 
 Generics are a flexible way to create functions whose parameter type is cast to the type of supplied argument (parameterize types). In other words, the same generic function can be used with different argument types and not break. 
  
     function echo<Type>(data: Type): Type {
@@ -754,8 +760,22 @@ Generics are a flexible way to create functions whose parameter type is cast to 
     let foo = echo<string>("FUBAR")    
     let bar = echo<number>(27)
 
-    console.log(foo)
-    console.log(bar)
+### Generic Types 
+
+// const echo2 is a function that accepts a parameter of type T and its return is type T, and is then assigned echo which has that pattern
+    const echo2: <T>(data: T) => T = echo;
+    console.log(echo2<string>("Something"));
+
+### Generic with array argument 
+
+    function printAll<T>(args: T[]) {
+      args.forEach(e => console.log(e))
+    }
+
+    printAll<string>(["apple", "banana"])
+
+
+
 
 
 ### Generics with classes 
