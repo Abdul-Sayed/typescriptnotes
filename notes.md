@@ -739,13 +739,14 @@ In index.ts
 
 
 ## Generics 
-Generics are a flexible way to create functions whose parameter type is cast to the type of supplied argument (parameterize types)
+Generics are a flexible way to create functions whose parameter type is cast to the type of supplied argument (parameterize types). In other words, the same generic function can be used with different argument types and not break. 
  
     function echo<Type>(data: Type): Type {
       return data
     }
 
-    let foo = echo<string>("FUBAR")    // the agrument types will be inferred but can be made explicit as <string>
+// the agrument types will be inferred but can be made explicit as <string> or <number>
+    let foo = echo<string>("FUBAR")    
     let bar = echo<number>(27)
 
     console.log(foo)
@@ -753,6 +754,21 @@ Generics are a flexible way to create functions whose parameter type is cast to 
 
 
 ### Generics with classes 
+
+    class SimpleMath<T extends number | string, U extends number | string> {
+      baseValue: T;
+      multiplyValue: U;
+      calculate(): number {
+        return +this.baseValue * +this.multiplyValue;
+      }
+    }
+
+    const simpleMath = new SimpleMath<number, string>();
+
+    simpleMath.baseValue = 10;
+    simpleMath.multiplyValue = "20";
+    console.log(simpleMath.calculate())
+
 
     class Person {
       firstName: string;
