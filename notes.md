@@ -831,3 +831,39 @@ Generics are a flexible way to create functions whose parameter type is cast to 
     console.log(foo); // Admin {firstname: 'admin', lastName: 'boss'}
 
     console.log(personEcho(55))  // Argument of type 55 is not assignable to parameter of type Person
+
+
+  // example  
+
+      class MyMap<T extends number | string> {
+      private map: { [key: string]: T } = {}
+
+      setItem(key: string, item: T): void {
+        this.map[key] = item
+      }
+
+      getItem(key: string) {
+        return this.map[key]
+      }
+
+      clear() {
+        this.map = {}
+      }
+
+      printMap() {
+        for (let key in this.map) {
+          console.log(`${key} : ${this.map[key]}`)
+        }
+      }
+
+    }
+
+    const numberMap = new MyMap<number>();
+    numberMap.setItem('apples', 5);
+    numberMap.setItem('bananas', 10);
+    numberMap.printMap();
+
+    const stringMap = new MyMap<string>();
+    stringMap.setItem('name', "Max");
+    stringMap.setItem('age', "27");
+    stringMap.printMap();
