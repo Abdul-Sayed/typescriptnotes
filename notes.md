@@ -260,7 +260,7 @@ When passing objects as a function argument, the entire passed object needs to b
 
 
 Instead of typecasting the entire object, only the property the function needs can be casted.
-When passing large objects, this is clearly advantages. Only type cast the properties used.
+When passing large objects, this is clearly advantageus. Only type cast the properties used.
 
     function greet(person: { name: string }): void {
       console.log(`Hello ${person.name}`)
@@ -867,3 +867,111 @@ Generics are a flexible way to create functions whose parameter type is cast to 
     stringMap.setItem('name', "Max");
     stringMap.setItem('age', "27");
     stringMap.printMap();
+
+
+## Decorators 
+
+    // Decorators are functions that can be attached to classes, adding functionality. They take the class constructor as the parameter. 
+
+    function logged(constructorFn: Function) {
+      console.log(constructorFn)
+    }
+
+    @logged
+    class Person {
+      constructor() {
+        console.log("Hi")
+      }
+    }
+
+
+    //Factory
+    function logging(value: boolean) {
+      return value ? logged : null;
+    }
+
+    @logging(true)
+    class Car {
+
+    }
+
+
+    //Advanced 
+
+    function printable(constructorFn: Function) {
+      constructorFn.prototype.print = function () {
+        console.log(this);
+      }
+    }
+
+    @logging(true)
+    @printable
+    class Plant {
+      name = "Green Plant"
+    }
+
+    const plant = new Plant();
+
+    (<any>plant).print()
+
+    // Class Decorators
+    // Method Decorator  and Property Decorators
+    function editable(value: boolean) {
+      return function (target: any, propName: string, descriptor: PropertyDescription) {
+        descriptor.writable = value;
+      }
+    }
+
+    function overwritable(value: boolean) {
+      return function (target: any, propName: string): any {
+        const newDescriptor: PropertyDescriptor = {
+          writable: value
+        }
+        return newDescriptor;
+      }
+    }
+
+    class Project {
+      @overwritable(false);
+      projectName: string;
+
+      constructor(name: string) {
+        this.projectName = name;
+      }
+
+      @editable(false)
+      calcBudget() {
+        console.log(1000)
+      }
+    }
+
+    const project = new Project("Super Project");
+
+
+
+    // Parameter Decorator
+    function printInfo(target: any, methodName: string, paramIndex: number) {
+      console.log("Target:", target)
+      console.log("methodName:", methodName)
+      console.log("paramIndex:", paramIndex)
+    }
+
+    class Course {
+      name: string;
+      constructor(name: string) {
+        this.name = name;
+      }
+      printStudentNumbers(mode: string, @printInfo printAll: boolean) {
+        if (printAll) {
+          console.log(10000);
+        } else {
+          console.log(2000);
+        }
+      }
+    }
+
+    const course = new Course("Super Course");
+    course.printStudentNumbers("anything", true);
+    course.printStudentNumbers("anything", false);
+
+
