@@ -114,6 +114,12 @@ let favorites: string[];
     testResults.push(-2.9)   // ok
     testResults.push("hell")   // breaks
 
+
+    // Array<Type>
+    const cats: Array<string> = ['Simba', 'Aslan'];
+    //  Type[] does the same thing. 
+    const cats2: string[] = ['Simba', 'Aslan'];
+
 Mixed arrays are inferred by javascript to be a union of multiple types
 
 ## Tupule
@@ -246,6 +252,17 @@ console.log(multiply(5, 'Max'))  //==> ts complains beacuse 2nd argument is not 
 
 
 ## Interfaces  
+Interfaces are custom types 
+
+    interface Cat {
+      name: string,
+      age: number
+    }
+
+    const betterCats: Array<Cat> = [   // or betterCats: Cat[]
+      { name: 'Simba', age: 22 },
+      { name: 'Aslan', age: 9999 }
+    ];
 
 When passing objects as a function argument, the entire passed object needs to be type casted;
 
