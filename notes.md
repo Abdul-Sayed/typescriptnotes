@@ -252,63 +252,20 @@ console.log(multiply(5, 'Max'))  //==> ts complains beacuse 2nd argument is not 
 
 
 ## Interfaces  
-Interfaces are custom types 
+An interface is a specification that declares a set of related properties and methods
+A class commits to supporting the specification by implementing the interface. The interface can also be used as a custom data type. 
 
-    interface Cat {
+    export interface Cat {
       name: string,
       age: number
     }
+  ...
+    import {Cat} from ./cat
 
-    const betterCats: Array<Cat> = [   // or betterCats: Cat[]
+    const betterCats: Array<Cat> = [         // or const betterCats: Cat[]
       { name: 'Simba', age: 22 },
       { name: 'Aslan', age: 9999 }
     ];
-
-When passing objects as a function argument, the entire passed object needs to be type casted;
-
-    function greet(person: { name: string; age: number }): void {
-      console.log(`Hello ${person.name}`)
-    }
-    const person = {
-      name: "Maxx",
-      age: 27
-    }
-    greet(person)
-
-
-Instead of typecasting the entire object, only the property the function needs can be casted.
-When passing large objects, this is clearly advantageus. Only type cast the properties used.
-
-    function greet(person: { name: string }): void {
-      console.log(`Hello ${person.name}`)
-    }
-    const person = {
-      name: "Maxx",
-      age: 27
-    }
-    greet(person)
-
-
-If certain object properties are being used often, an Interface can be created to represent them when passing types to functions. 
-Only the object and the interface need to be updated during changes, and the functions can be guaranteed certain properties are available
-    interface NamedPerson {
-      name: string
-    }
-    function greet(person: NamedPerson): void {
-      console.log(`Hello ${person.name}`)
-    }
-    const person = {
-      name: "Maxx",
-      age: 27
-    }
-    greet(person)
-
-Note: Typescript complains if you pass an object literal that contains extra properties directly to the function. A reference to an object is fine.
-Interfaces can be updated to take on additional opional properties;
-    interface NamedPerson {
-      name: string,
-      age?: number
-    }
 
 ### Interfaces with dynamic data
 If you want to set up an interface for dynamic data where the properties are not known in advance, use:
@@ -355,6 +312,7 @@ If you want to set up an interface for dynamic data where the properties are not
     person.greet('Anna');  // Well hello there Anna
 
 ### Interfaces with classes 
+We create a business object class if it provides functionality throughout the application
 
     interface NamedPerson {
       name: string;
